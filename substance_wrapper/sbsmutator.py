@@ -18,9 +18,7 @@ def info(inputs):
 	else:
 		args.append(inputs)
 
-	info = subprocess.run(args, stdout=subprocess.PIPE).stdout.decode(encoding)
-
-	return info
+	return subprocess.run(args, stdout=subprocess.PIPE).stdout.decode(encoding)
 
 
 def edit(

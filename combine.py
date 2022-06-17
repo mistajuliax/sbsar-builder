@@ -32,7 +32,7 @@ def create_mat(aDestFileAbsPath, basec_in, rough_in, normal_in, height_in, ao_in
         aGraph = sbsDoc.getSBSGraph(aGraphIdentifier = 'Material')
 
         if basec_in is not None:
-            
+
             #basecImg = sbsDoc.createLinkedResource(aResourcePath = basec_in,
             #            aResourceTypeEnum = sbsenum.ResourceTypeEnum.BITMAP)
             #print(basecImg.getPkgResourcePath())
@@ -116,7 +116,7 @@ def create_mat(aDestFileAbsPath, basec_in, rough_in, normal_in, height_in, ao_in
 
 print('Number of arguments:', len(sys.argv), 'arguments.')
 arglist = sys.argv[1:]
-print('Argument List:', str(arglist))
+print('Argument List:', arglist)
 
 if len(arglist) > 0:
     sb_basec, sb_normal, sb_rough, sb_height, sb_ao = None, None, None, None, None
@@ -126,7 +126,7 @@ if len(arglist) > 0:
         fname = ntpath.basename(arg)
         if 'COLOR' in fname.upper():
             sb_basec = arg
-            print("Base color:", arg)
+            print("Base color:", sb_basec)
         if 'NORMAL' in fname.upper():
             sb_normal = arg
             print("Normal:", arg)
@@ -139,16 +139,16 @@ if len(arglist) > 0:
         if 'AMBIENT' in fname.upper():
             sb_ao = arg
             print("AO:", arg)
-        #print(re.split(r"\W+", fname))
+            #print(re.split(r"\W+", fname))
 
-    mat_name = sb_name + ".sbs"
+    mat_name = f"{sb_name}.sbs"
     create_mat(mat_name, sb_basec, sb_rough, sb_normal, sb_height, sb_ao)
 
     # cook .sbs into .sbsar
     wsbs.sbscooker(inputs=mat_name)
 
     # print info about .sbsar
-    print(wsbs.sbsrender.info(sb_name + ".sbsar"))
+    print(wsbs.sbsrender.info(f"{sb_name}.sbsar"))
 
 try:
     input("Press enter to continue")

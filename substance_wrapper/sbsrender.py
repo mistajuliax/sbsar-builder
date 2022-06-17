@@ -11,9 +11,8 @@ encoding = "utf-8"
 def info(input):
 	sbsrender_exec = get_tool_exec("sbsrender")
 
-	info = subprocess.run([sbsrender_exec, "info", "--input", input], stdout=subprocess.PIPE).stdout.decode(encoding)
-
-	return info
+	return subprocess.run([sbsrender_exec, "info", "--input", input],
+	                      stdout=subprocess.PIPE).stdout.decode(encoding)
 
 
 def render(
